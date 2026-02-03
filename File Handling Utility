@@ -1,0 +1,63 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class FileHandlingUtility {
+
+    // Method to write data into a file
+    public static void writeFile(String fileName, String content) {
+        try {
+            FileWriter writer = new FileWriter(fileName);
+            writer.write(content);
+            writer.close();
+            System.out.println("File written successfully.");
+        } catch (IOException e) {
+            System.out.println("Error while writing file.");
+        }
+    }
+
+    // Method to read data from a file
+    public static void readFile(String fileName) {
+        try {
+            File file = new File(fileName);
+            Scanner reader = new Scanner(file);
+
+            System.out.println("\nFile Content:");
+            while (reader.hasNextLine()) {
+                System.out.println(reader.nextLine());
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
+    }
+
+    // Method to modify (append) data into a file
+    public static void modifyFile(String fileName, String newContent) {
+        try {
+            FileWriter writer = new FileWriter(fileName, true); // true = append mode
+            writer.write("\n" + newContent);
+            writer.close();
+            System.out.println("File modified successfully.");
+        } catch (IOException e) {
+            System.out.println("Error while modifying file.");
+        }
+    }
+
+    // Main method
+    public static void main(String[] args) {
+
+        String fileName = "sample.txt";
+
+        // Writing to file
+        writeFile(fileName, "Hello! This is my internship file handling task.");
+
+        // Reading file
+        readFile(fileName);
+
+        // Modifying file
+        modifyFile(fileName, "This line is added later using modify operation.");
+
+        // Reading file again
+        readFile(fileName);
+    }
+}
